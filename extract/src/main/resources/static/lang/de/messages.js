@@ -151,7 +151,7 @@ var LANG_MESSAGES = {
         },
         "notImplemented" : {
             "title" : "Noch nicht implementiert",
-            "message" : "Entschuldigung, diese Funktion ist noch nicht verfügbar."
+            "message" : "Leider steht diese Funktion noch nicht zur Verfügung."
         }
     }
 };
