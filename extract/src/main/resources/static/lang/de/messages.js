@@ -1,6 +1,6 @@
 /**
  * @file Creates an object containing the localized messages using by scripts.
- * @author Yves Grasset
+ * @author Camptocamp
  */
 
 /**
