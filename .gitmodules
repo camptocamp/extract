@@ -1,0 +1,3 @@
+[submodule "sitn_geoshop_connector"]
+	path = sitn_geoshop_connector
+	url = https://github.com/sitn/sitn_geoshop_connector

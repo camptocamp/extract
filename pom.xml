@@ -11,7 +11,7 @@
         <connection>scm:git:https://github.com/asit-asso/extract.git</connection>
     </scm>
     <build>
-        <plugins>
+        <plugins>        
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -50,7 +50,7 @@
                         </manifestEntries>
                     </archive>
                 </configuration>
-            </plugin>
+            </plugin>      
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <version>3.1.0</version>
@@ -77,6 +77,8 @@
     </build>
     
     <modules>
+        <module>sitn_geoshop_connector/plugin-interface</module>
+        <module>sitn_geoshop_connector/connectors/extract-connector-geoshop</module>
         <module>extract-interface</module>
         <module>extract-connector-easysdiv4</module>
         <module>extract-task-archive</module>

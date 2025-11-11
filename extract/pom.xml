@@ -33,7 +33,7 @@
             <artifactId>extract-plugin-commoninterface</artifactId>
             <version>2.3.0</version>
             <scope>compile</scope>
-        </dependency>
+        </dependency>      
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
