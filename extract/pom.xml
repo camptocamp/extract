@@ -470,6 +470,18 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.2</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <!-- Directory where your extra JARs live -->
+                            <directory>../sitn_geoshop_connector/connectors/extract-connector-geoshop/target</directory>
+                            <targetPath>WEB-INF/classes/connectors/</targetPath>
+                            <includes>
+                                <include>extract-connector-geoshop-*.jar</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                </configuration>
             </plugin>
         </plugins>
     </build>
