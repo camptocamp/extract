@@ -264,12 +264,12 @@ public class Request implements Serializable {
     @JoinTable(name = "requests_users",
             joinColumns = {
                 @JoinColumn(name = "id_request", referencedColumnName = "id_request",
-                        foreignKey = @ForeignKey(name = "FK_PROCESSES_USERS_REQUESTS")
+                        foreignKey = @ForeignKey(name = "FK_REQUESTS_USERS_REQUESTS")
                 )
             },
             inverseJoinColumns = {
                 @JoinColumn(name = "id_user", referencedColumnName = "id_user",
-                        foreignKey = @ForeignKey(name = "FK_PROCESSES_USERS_USER")
+                        foreignKey = @ForeignKey(name = "FK_REQUESTS_USERS_USER")
                 )
             }
     )
@@ -280,12 +280,12 @@ public class Request implements Serializable {
     @JoinTable(name = "requests_usergroups",
             joinColumns = {
                     @JoinColumn(name = "id_request", referencedColumnName = "id_request",
-                            foreignKey = @ForeignKey(name = "FK_PROCESSES_USERGROUPS_REQUESTS")
+                            foreignKey = @ForeignKey(name = "FK_REQUESTS_USERGROUPS_REQUESTS")
                     )
             },
             inverseJoinColumns = {
                     @JoinColumn(name = "id_usergroup", referencedColumnName = "id_usergroup",
-                            foreignKey = @ForeignKey(name = "FK_PROCESSES_USERGROUPS_USERGROUP")
+                            foreignKey = @ForeignKey(name = "FK_REQUESTS_USERGROUPS_USERGROUP")
                     )
             }
     )
