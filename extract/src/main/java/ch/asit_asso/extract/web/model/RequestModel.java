@@ -49,7 +49,7 @@ import org.springframework.data.domain.Page;
  *
  * @author Yves Grasset
  */
-public class RequestModel {
+public class RequestModel extends OwnedObjectModel {
 
     /**
      * The string that identifies the localized label of an order export task.
@@ -136,26 +136,6 @@ public class RequestModel {
      */
     private final Path outputFolderPath;
 
-    /**
-     * The operators groups associated to this process.
-     */
-    private final List<UserGroup> userGroupsList;
-
-    /**
-     * An array that contains the identifiers of the operators groups associated with this process.
-     */
-    private String[] userGroupsIds;
-
-    /**
-     * The operators associated to this process.
-     */
-    private final List<UserModel> usersList;
-
-    /**
-     * An array that contains the identifiers of the operators associated with this process.
-     */
-    private String[] usersIds;
-    
     private final List<String> validationFocusProperties;
 
 
@@ -196,34 +176,12 @@ public class RequestModel {
         Arrays.sort(this.fullHistory, new RequestHistoryRecordByStepComparator());
         this.currentProcessStep = (!ArrayUtils.isEmpty(this.fullHistory))
                 ? this.fullHistory[this.fullHistory.length - 1].getProcessStep() : -1;
-        this.usersList = new ArrayList<>();
-        this.userGroupsIds = new String[]{};
-        this.userGroupsList = new ArrayList<>();
-        this.usersIds = new String[]{};
-        this.setUsersFromDomainObject(domainRequest);
-        this.setUserGroupsFromDomainObject(domainRequest);
         this.processHistory = this.buildProcessHistory();
         this.validationFocusProperties = List.of(validationFocusProperties);
         this.logger.debug("The process history contains {} items.", this.processHistory.length);
+        setUsersFromDomainObject(domainRequest.getUsersCollection());
+        setUserGroupsFromDomainObject(domainRequest.getUserGroupsCollection());        
     }
-
-    /**
-     * Defines the process operators groups in this model based on what is in the data source.
-     *
-     * @param domainRequest the data object for this process
-     */
-    private void setUserGroupsFromDomainObject(final Request domainRequest) {
-        assert domainRequest != null : "The process data object must not be null.";
-
-        List<String> userGroupsIdsList = new ArrayList<>();
-
-        for (UserGroup userGroup : domainRequest.getUserGroupsCollection()) {
-            this.userGroupsList.add(userGroup);
-            userGroupsIdsList.add(userGroup.getId().toString());
-        }
-        this.userGroupsIds = userGroupsIdsList.toArray(String[]::new);
-    }
-
 
     /**
      * Obtains the connector that imported this request.
@@ -1448,102 +1406,4 @@ public class RequestModel {
         return filesList.toArray(new FileModel[]{});
     }
 
-    /**
-     * Defines the users of this process.
-     *
-     * @param users an array containing the operators directly attached to this process
-     */
-    public final void setUsers(final UserModel[] users) {
-        this.usersList.clear();
-        this.usersList.addAll(Arrays.asList(users));
-
-        List<String> list = new ArrayList<>();
-        for (UserModel user : this.usersList) {
-            list.add(user.getId().toString());
-        }
-        this.usersIds = list.toArray(new String[]{});
-    }
-
-
-
-    /**
-     * Defines the identifiers of the operators associated with this process.
-     *
-     * @param joinedUsersIds a string with the operator identifiers separated by commas
-     */
-    public final void setUsersIds(final String joinedUsersIds) {
-        this.usersIds = joinedUsersIds.split(",");
-    }
-    
-    /**
-     * Obtains the identifiers of the operators associated to this process.
-     *
-     * @return a string with the identifiers separated by commas
-     */
-    public final String getUsersIds() {
-        return StringUtils.join(this.usersIds, ',');
-    }
-
-
-    /**
-     * Obtains the users of this process.
-     *
-     * @return an array containing the users that make up this process
-     */
-    public final UserModel[] getUsers() {
-        return this.usersList.toArray(new UserModel[]{});
-    }
-    
-    /**
-     * Defines the process operators in this model based on what is in the data source.
-     *
-     * @param domainProcess the data object for this process
-     */
-    private void setUsersFromDomainObject(final Request domainRequest) {
-        assert domainRequest != null : "The process data object must not be null.";
-
-        List<String> usersIdsList = new ArrayList<>();
-        for (User user : domainRequest.getUsersCollection()) {
-            this.usersList.add(new UserModel(user));
-            usersIdsList.add(user.getId().toString());
-        }
-        this.usersIds = usersIdsList.toArray(String[]::new);
-    }
-
-    /**
-     * Obtains the identifiers of the operators groups associated to this process.
-     *
-     * @return a string with the identifiers separated by commas
-     */
-    public final String getUserGroupsIds() {
-        return StringUtils.join(this.userGroupsIds, ',');
-    }
-    
-    /**
-     * Defines the users groups of this process.
-     *
-     * @param userGroups an array containing the user groups that operate on this process
-     */
-    public final void setUserGroups(final UserGroup[] userGroups) {
-        this.userGroupsList.clear();
-        this.userGroupsList.addAll(Arrays.asList(userGroups));
-
-        List<String> list = new ArrayList<>();
-
-        for (UserGroup userGroup : this.userGroupsList) {
-            list.add(userGroup.getId().toString());
-        }
-        this.usersIds = list.toArray(new String[]{});
-    }
-
-
-
-    /**
-     * Defines the identifiers of the operators groups associated with this process.
-     *
-     * @param joinedUserGroupsIds a string with the operator group identifiers separated by commas
-     */
-    public final void setUserGroupsIds(final String joinedUserGroupsIds) {
-        this.userGroupsIds = joinedUserGroupsIds.split(",");
-    }
 }
