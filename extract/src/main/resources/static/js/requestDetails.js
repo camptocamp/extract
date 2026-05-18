@@ -243,7 +243,7 @@ function _initializeExportButtons(map) {
         label: `${LANG_MESSAGES.requestDetails.exportToDxf.label} (LV95)`,
         tooltip: `${LANG_MESSAGES.requestDetails.exportToDxf.tooltip} (LV95)`,
         projection: "EPSG:2056",
-        css:"lv95"
+        styleClass: "lv95"
     }));
 }
 
@@ -370,10 +370,7 @@ class ExportToDxfControl extends ol.control.Control {
         button.title = options.tooltip;
 
         var element = document.createElement('div');
-        element.className = 'export-dxf export-button ol-unselectable ol-control';
-        if (options.css) {
-            element.className += " " + options.css;
-        }
+        element.className = `${options.style || "export-dxf"} export-button ol-unselectable ol-control`;
         element.appendChild(button);
 
         super({
