@@ -239,6 +239,12 @@ function _initializeExportButtons(map) {
         label: LANG_MESSAGES.requestDetails.exportToKml.label,
         tooltip: LANG_MESSAGES.requestDetails.exportToKml.tooltip
     }));
+    map.addControl(new ExportToDxfControl({
+        label: `${LANG_MESSAGES.requestDetails.exportToDxf.label} (LV95)`,
+        tooltip: `${LANG_MESSAGES.requestDetails.exportToDxf.tooltip} (LV95)`,
+        projection: "EPSG:2056",
+        css:"lv95"
+    }));
 }
 
 
@@ -365,6 +371,9 @@ class ExportToDxfControl extends ol.control.Control {
 
         var element = document.createElement('div');
         element.className = 'export-dxf export-button ol-unselectable ol-control';
+        if (options.css) {
+            element.className += " " + options.css;
+        }
         element.appendChild(button);
 
         super({
@@ -375,11 +384,10 @@ class ExportToDxfControl extends ol.control.Control {
         button.addEventListener('click', this.handleExportToDxf.bind(this), false);
         button.addEventListener('touchstart', this.handleExportToDxf.bind(this), false);
         this.DxfGlobalHandle = 2000;
+        this.projection = options.projection || "";
     }
 
     buildDxfPolyline(ring) {
-        console.log(ring);
-
         this.DxfGlobalHandle++;
         var pointsCount = ring.length;
         var dxfPolygon = '  0\n' +
@@ -1687,15 +1695,16 @@ class ExportToDxfControl extends ol.control.Control {
 
         return parseInt(number, 10).toString(16);
     }
-
+    
     getLinearRingsFromFeatures(features) {
-        console.log(features);
-
         var rings = [];
 
         for (var i = 0; i < features.length; i++) {
             var feature = features[i];
-            var geometry = feature.getGeometry();
+            var geometry = feature.getGeometry().clone();
+            if (this.projection) {
+                geometry.transform('EPSG:3857', this.projection);
+            }
 
             if (geometry instanceof ol.geom.MultiPolygon) {
                 var polygons = geometry.getPolygons();
