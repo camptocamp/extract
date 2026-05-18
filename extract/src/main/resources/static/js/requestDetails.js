@@ -370,7 +370,7 @@ class ExportToDxfControl extends ol.control.Control {
         button.title = options.tooltip;
 
         var element = document.createElement('div');
-        element.className = `${options.style || "export-dxf"} export-button ol-unselectable ol-control`;
+        element.className = `${options.styleClass || "export-dxf"} export-button ol-unselectable ol-control`;
         element.appendChild(button);
 
         super({
