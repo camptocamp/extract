@@ -565,6 +565,11 @@ table.list-table.files-list-table {
     bottom: 0.5em;
 }
 
+.lv95 {
+    right: 8.5em;
+    bottom: 0.5em;
+}
+
 .export-kml {
     right: 4.5em;
     bottom: 0.5em;
@@ -576,7 +581,7 @@ table.list-table.files-list-table {
 }
 
 .ol-control.ol-attribution {
-    right: 8.5em;
+    right: 15.5em;
 }
 
 .ol-attribution.ol-uncollapsible ~ .ol-control.export-button {
