@@ -11,6 +11,9 @@ jobs:
         steps:
             - name: Download the code
               uses: actions/checkout@v4
+
+            - name: Checkout submodules
+              run: git submodule update --init --recursive
               
             - name: Install JDK 17
               uses: actions/setup-java@v4
