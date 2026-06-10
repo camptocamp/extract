@@ -73,11 +73,36 @@
                     </filesets>
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-resource-one</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>./extract/src/main/resources/connectors/</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>./sitn_geoshop_connector/connectors/extract-connector-geoshop/target/</directory>
+                                    <includes>
+                                        <include>extract-connector-geoshop*.jar</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
-    
+
     <modules>
         <module>extract-interface</module>
+        <module>sitn_geoshop_connector/connectors/extract-connector-geoshop</module>
         <module>extract-connector-easysdiv4</module>
         <module>extract-task-archive</module>
         <module>extract-task-email</module>
