@@ -87,6 +87,13 @@ public class Request implements Serializable {
     private String orderGuid;
 
     /**
+     * The description entered by the customer for this order.
+     */
+    @Size(max = 4000)
+    @Column(name = "p_orderdescription", length = 4000)
+    private String orderDescription;
+
+    /**
      * The GUID that uniquely identifies the ordered data item on the originating server.
      */
     @Size(max = 255)
@@ -401,6 +408,28 @@ public class Request implements Serializable {
      */
     public void setOrderLabel(final String label) {
         this.orderLabel = label;
+    }
+
+
+
+    /**
+     * Obtains the description entered by the customer for the order that this data item request is a part of.
+     *
+     * @return the order description
+     */
+    public String getOrderDescription() {
+        return this.orderDescription;
+    }
+
+
+
+    /**
+     * Defines the description entered by the customer for the order that this data item request is a part of.
+     *
+     * @param description the order description
+     */
+    public void setOrderDescription(final String description) {
+        this.orderDescription = description;
     }
 
 
