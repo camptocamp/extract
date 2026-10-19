@@ -520,6 +520,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                                 </div>
                             </div>
                         </div>
+                        <div class="row" style="margin-top: 20px" th:unless="${#strings.isEmpty(request.orderDescription)}">
+                            <div class="col-xl-12">
+                                <h4 th:text="#{requestDetails.orderDetails.description.title}">{Description}</h4>
+                                <div th:text="${request.orderDescription}" class="preserve-whitespace">
+                                    {Order description}
+                                </div>
+                            </div>
+                        </div>
                         <div class="row" style="margin-top: 20px">
                             <div class="col-xl-12">
                                 <h4>

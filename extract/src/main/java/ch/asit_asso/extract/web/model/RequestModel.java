@@ -356,6 +356,17 @@ public class RequestModel extends OwnedObjectModel {
 
 
     /**
+     * Obtains the description entered by the customer for the order that this request is part of.
+     *
+     * @return the order description
+     */
+    public final String getOrderDescription() {
+        return this.request.getOrderDescription();
+    }
+
+
+
+    /**
      * Obtains the name of the organization for which this order was placed.
      *
      * @return the organization name

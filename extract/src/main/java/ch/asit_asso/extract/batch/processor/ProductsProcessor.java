@@ -77,6 +77,7 @@ public class ProductsProcessor implements ItemProcessor<IProduct, Request> {
             request.setClientDetails(product.getClientDetails());
             request.setOrderGuid(product.getOrderGuid());
             request.setOrderLabel(product.getOrderLabel());
+            request.setOrderDescription(product.getOrderDescription());
             request.setOrganism(product.getOrganism());
             request.setOrganismGuid(product.getOrganismGuid());
             request.setParameters(product.getOthersParameters());
