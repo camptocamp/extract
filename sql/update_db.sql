@@ -107,7 +107,6 @@ ALTER TABLE requests
       REFERENCES processes (id_process) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE SET NULL;
 
-ALTER TABLE requests ADD COLUMN IF NOT EXISTS p_orderdescription VARCHAR (4000);
 ALTER TABLE requests ALTER COLUMN p_parameters TYPE TEXT;
 ALTER TABLE requests ALTER COLUMN p_perimeter TYPE TEXT;
 ALTER TABLE requests ALTER COLUMN p_tiersguid TYPE VARCHAR (255) COLLATE pg_catalog."default";
